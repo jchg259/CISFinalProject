@@ -1,17 +1,15 @@
-#Created by Bineet Kumar Mohanta
+#Adapted from program by Bineet Kumar Mohanta
 
 # Importing Modules
 import numpy as np
 
 #Ask for sequences from the user
 def nw_algoirthm(sequence_1, sequence_2):
-#sequence_1 = input("Enter or paste sequence 1:")
-#sequence_2 = input("Enter or paste sequence 2:")
 
 #sequence_1 = "gavlimxcst"
 #sequence_2 = "gavyzxc"
 
-#Creat Matrices
+#Create Matrices
     main_matrix = np.zeros((len(sequence_1)+1,len(sequence_2)+1))
     match_checker_matrix = np.zeros((len(sequence_1),len(sequence_2)))
 

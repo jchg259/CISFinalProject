@@ -22,7 +22,7 @@ def matrices_reader():
 	    
             # call read text file function and add each file to list
 			matrix = np.loadtxt(read_text_file(file_path), dtype=str)
-			print(matrix)
+			#print(matrix)
 			matrixlist.append(matrix)
 	
 	return matrixlist
