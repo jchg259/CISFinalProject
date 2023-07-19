@@ -21,9 +21,11 @@ def matrices_reader():
 			file_path = f"{path}/{file}"
 	    
             # call read text file function and add each file to list
-			matrix = np.loadtxt(read_text_file(file_path), dtype=str)
-			#print(matrix)
-			matrixlist.append(matrix)
+			#print(read_text_file(file_path))
+			matrixtext = read_text_file(file_path)
+			matrix = np.loadtxt(matrixtext, dtype=str)
+			print(matrix)
+			#matrixlist.append(matrix)
 	
 	return matrixlist
             
