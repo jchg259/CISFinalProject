@@ -1,13 +1,8 @@
 #Adapted from program by Bineet Kumar Mohanta
 
-# Importing Modules
 import numpy as np
 
-#Ask for sequences from the user
 def nw_algoirthm(sequence_1, sequence_2,letters, SCORE_matrix):
-
-#sequence_1 = "gavlimxcst"
-#sequence_2 = "gavyzxc"
 
 #Create Matrices
     main_matrix = np.zeros((len(sequence_1)+1,len(sequence_2)+1))
