@@ -4,14 +4,15 @@ import numpy as np
   
 def matrices_reader():
 	matrixlist = list()
-	path = r"/Users/jgray/Documents/CIS Final Project/CISFinalProject/MatricesTest"
+	path = r"/Users/jgray/Documents/CIS Final Project/CISFinalProject/Matrices"
 	
 	# Change the directory
 	os.chdir(path)
     
 	def read_text_file(file_path):
 		with open(file_path, 'r') as f:
-			return f.read()
+			letters = str(f.readline())
+			return letters, f.read()
   
 	
     # iterate through all file
@@ -22,17 +23,21 @@ def matrices_reader():
 	    
             # call read text file function and add each file to list
 			#print(read_text_file(file_path))
-			matrixtext = read_text_file(file_path)
-			matrix = np.loadtxt(matrixtext, dtype=str)
-			print(matrix)
-			#matrixlist.append(matrix)
+			letters, matrixtext = read_text_file(file_path)
+			matrixtext = matrixtext.replace("\n", "  ")
+			matrixtext = matrixtext.replace("  ", " ")
+			matrixtext = matrixtext.replace("   ", " ")
+			matrixarray = np.fromstring(matrixtext, sep = ' ')
+			matrixarray = matrixarray.reshape(24,24)
+			matrixlist.append(matrixarray)
 	
-	return matrixlist
+	return letters, matrixlist
             
 
 
-	#sequence1 and sequence2 are after global sequencing
-def PAM_Score(sequence1, sequence2, matrix):
+#sequence1 and sequence2 are after global sequencing
+#Computes PAM_Score (Note: consider putting inside PAMScoreList)
+"""def PAM_Score(sequence1, sequence2, matrix):
 
 	n = len(sequence1)
 	m = len(sequence2)
@@ -57,12 +62,6 @@ def PAM_Score(sequence1, sequence2, matrix):
 	pamscore = pamscore + float(matrix[row][col])
 
 	return pamscore
-
-
-def PAM_Score_List(alignment1, alignment2, PAMList):
-	i=0
-	PAMScoreList = list()
-	for item in PAMList:  
-		PAMScoreList.append(PAM_Score(alignment1,alignment2,PAMList[i]))
-		i = i+1
-	return PAMScoreList
+"""
+#Create a list of all 50 PAM scores
+	

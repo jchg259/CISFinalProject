@@ -2,6 +2,10 @@ import numpy as np
 
 from matrices import matrices_reader
 
+from galignment import nw_algoirthm
+
+from PAMScoreList import PAM_Score_List
+
 '''
 sequence1 = "GAVLIMXCST"
 sequence2 = "GAV-YZXC--"
@@ -43,4 +47,21 @@ for i in range(0,max(n,m)):
 print(pamscore)
 '''
 
-matrices_reader()
+#letters, matrixlist = matrices_reader()
+#matrixitem = matrixlist[1]
+#print(letters)
+#print(matrixitem)
+
+
+
+#sequence_1 = "gavlimxcst"
+#sequence_2 = "gavyzxc"
+
+#sequence_1, sequence_2, GA_Score = nw_algoirthm("GAVLIMXCST","GAVYZXC",letters, matrixlist[0])
+#print(sequence_1)
+#print(sequence_2)
+#print(GA_Score)
+
+max, list = PAM_Score_List("GAVLIMXCST","GAVYZXC")
+print(max)
+print(list)

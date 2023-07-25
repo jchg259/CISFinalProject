@@ -4,7 +4,7 @@
 import numpy as np
 
 #Ask for sequences from the user
-def nw_algoirthm(sequence_1, sequence_2):
+def nw_algoirthm(sequence_1, sequence_2,letters, SCORE_matrix):
 
 #sequence_1 = "gavlimxcst"
 #sequence_2 = "gavyzxc"
@@ -12,21 +12,25 @@ def nw_algoirthm(sequence_1, sequence_2):
 #Create Matrices
     main_matrix = np.zeros((len(sequence_1)+1,len(sequence_2)+1))
     match_checker_matrix = np.zeros((len(sequence_1),len(sequence_2)))
+    
 
 # Providing the scores for match ,mismatch and gap
-    match_reward = 1
-    mismatch_penalty = -1
-    gap_penalty = -2
-
-#Fill the match checker matrix accrording to match or mismatch
+    #SCORE_matrix = np.loadtxt("MatricesTest/Test20.txt", dtype=str)
+    #print(SCORE_matrix)
+    a=0
+    b=0
     for i in range(len(sequence_1)):
+        while sequence_1[i] != letters[a]:
+            a = a+1
         for j in range(len(sequence_2)):
-            if sequence_1[i] == sequence_2[j]:
-                match_checker_matrix[i][j]= match_reward
-            else:
-                match_checker_matrix[i][j]= mismatch_penalty
+            while sequence_2[j] != letters[b]:
+                b = b + 1
+            match_checker_matrix[i][j] = (SCORE_matrix[a][b])
+            b=0
+        a=0
+    gap_penalty = SCORE_matrix[0][23]
 
-#print(match_checker_matrix)
+    #print(match_checker_matrix)
 
 #Filling up the matrix using Needleman_Wunsch algorithm
 #STEP 1 : Initialisation
@@ -42,7 +46,7 @@ def nw_algoirthm(sequence_1, sequence_2):
                                 main_matrix[i-1][j]+gap_penalty,
                                 main_matrix[i][j-1]+ gap_penalty)
 
-#print(main_matrix)
+    #print(main_matrix)
 
 # STEP 3 : Traceback
 
@@ -52,8 +56,11 @@ def nw_algoirthm(sequence_1, sequence_2):
     ti = len(sequence_1)
     tj = len(sequence_2)
 
+    GA_Score = 0
+
     while(ti >0 and tj > 0):
 
+        GA_Score = GA_Score + main_matrix[ti][tj]
         if (ti >0 and tj > 0 and main_matrix[ti][tj] == main_matrix[ti-1][tj-1]+ match_checker_matrix[ti-1][tj-1]):
 
             aligned_1 = sequence_1[ti-1] + aligned_1
@@ -61,6 +68,7 @@ def nw_algoirthm(sequence_1, sequence_2):
 
             ti = ti - 1
             tj = tj - 1
+
     
         elif(ti > 0 and main_matrix[ti][tj] == main_matrix[ti-1][tj] + gap_penalty):
             aligned_1 = sequence_1[ti-1] + aligned_1
@@ -74,6 +82,7 @@ def nw_algoirthm(sequence_1, sequence_2):
             tj = tj - 1
 
 #test
-    print(aligned_1)
-    print(aligned_2)
-    return aligned_1, aligned_2
+    #print(aligned_1)
+    #print(aligned_2)
+    #print(GA_Score)
+    return aligned_1, aligned_2, GA_Score
