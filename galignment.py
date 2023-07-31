@@ -2,6 +2,7 @@
 
 import numpy as np
 
+
 def nw_algoirthm(sequence_1, sequence_2,letters, SCORE_matrix):
 
 #Create Matrices
@@ -28,16 +29,15 @@ def nw_algoirthm(sequence_1, sequence_2,letters, SCORE_matrix):
     gap_penalty = SCORE_matrix[0][23]
 
     #print(match_checker_matrix)
-
-    def match_checker_score(a, b, SCORE_matrix):
-        score = 0
-        m = 0
-        n = 0
-        while a != letters[m]:
+    map = {"A":0, "R":1, "N":2, "D":3, "C":4, "Q":5, "E":6, "G":7, "H":8, "I":9, "L":10, "K":11, "M":12, "F":13, "P":14, "S":15, "T":16, "W":17, "Y":18, "V":19, "B":20, "Z":21, "X":22}
+    def match_checker_score(a, b):
+        
+        """ while a != letters[m]:
             m = m+1
         while b != letters[n]:
-            n = n+1
-        return SCORE_matrix[m][n]
+            n = n+1"""
+        return SCORE_matrix[map[a]][map[b]]
+
 
 #Filling up the matrix using Needleman_Wunsch algorithm
 #STEP 1 : Initialisation
@@ -49,7 +49,7 @@ def nw_algoirthm(sequence_1, sequence_2,letters, SCORE_matrix):
 #STEP 2 : Matrix Filling
     for i in range(1,len(sequence_1)+1):
         for j in range(1,len(sequence_2)+1):
-            main_matrix[i][j] = max(main_matrix[i-1][j-1]+ match_checker_score(sequence_1[i-1], sequence_2[j-1], SCORE_matrix), #match_checker_matrix[i-1][j-1],
+            main_matrix[i][j] = max(main_matrix[i-1][j-1]+ match_checker_score(sequence_1[i-1], sequence_2[j-1]), 
                                 main_matrix[i-1][j]+gap_penalty,
                                 main_matrix[i][j-1]+ gap_penalty)
 
