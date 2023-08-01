@@ -28,7 +28,6 @@ def matrices_reader():
 			matrixtext = matrixtext.replace("  ", " ")
 			matrixtext = matrixtext.replace("   ", " ")
 			matrixtext = matrixtext.replace("    ", " ")
-			matrixtext = matrixtext.replace("     ", " ")
 			matrixarray = np.fromstring(matrixtext, sep = ' ')
 			matrixarray = matrixarray.reshape(24,24)
 			matrixlist.append(matrixarray)

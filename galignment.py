@@ -11,31 +11,13 @@ def nw_algoirthm(sequence_1, sequence_2,letters, SCORE_matrix):
     
 
 # Providing the scores for match ,mismatch and gap
-    #SCORE_matrix = np.loadtxt("MatricesTest/Test20.txt", dtype=str)
-    #print(SCORE_matrix)
-    """
-    a=0
-    b=0
-    for i in range(len(sequence_1)):
-        while sequence_1[i] != letters[a]:
-            a = a+1
-        for j in range(len(sequence_2)):
-            while sequence_2[j] != letters[b]:
-                b = b + 1
-            match_checker_matrix[i][j] = (SCORE_matrix[a][b])
-            b=0
-        a=0
-    """
+
     gap_penalty = SCORE_matrix[0][23]
 
     #print(match_checker_matrix)
     map = {"A":0, "R":1, "N":2, "D":3, "C":4, "Q":5, "E":6, "G":7, "H":8, "I":9, "L":10, "K":11, "M":12, "F":13, "P":14, "S":15, "T":16, "W":17, "Y":18, "V":19, "B":20, "Z":21, "X":22}
     def match_checker_score(a, b):
         
-        """ while a != letters[m]:
-            m = m+1
-        while b != letters[n]:
-            n = n+1"""
         return SCORE_matrix[map[a]][map[b]]
 
 

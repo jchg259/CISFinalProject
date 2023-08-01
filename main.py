@@ -20,7 +20,7 @@ print("The maximum score is:", maxScore)
 print("This comes from PAM",BestPAM)
 print("The alignment is:","\n",a1,"\n",a2)
 print("Here is the full list of PAM Scores:", PAMScorelist)
-#PAM_Score_Graph(PAMScorelist)
+PAM_Score_Graph(PAMScorelist)
 
 
 
