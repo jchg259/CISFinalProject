@@ -68,7 +68,7 @@ def nw_algoirthm(sequence_1, sequence_2,letters, SCORE_matrix):
     while(ti >0 and tj > 0):
 
         GA_Score = GA_Score + main_matrix[ti][tj]
-        if (ti >0 and tj > 0 and main_matrix[ti][tj] == main_matrix[ti-1][tj-1]+ match_checker_matrix[ti-1][tj-1]):
+        if (ti >0 and tj > 0 and main_matrix[ti][tj] == main_matrix[ti-1][tj-1]+ match_checker_score(sequence_1[ti-1], sequence_2[tj-1])):#match_checker_matrix[ti-1][tj-1]):
 
             aligned_1 = sequence_1[ti-1] + aligned_1
             aligned_2 = sequence_2[tj-1] + aligned_2
