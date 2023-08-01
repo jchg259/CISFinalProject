@@ -12,7 +12,7 @@ def PAM_Score_List(sequence_1, sequence_2):
         PAMlist[i] = score
     maxPAM = np.max(PAMlist)
     maxPAMind = -1
-    for i in range(25):
+    for i in range(50):
         if PAMlist[i] == maxPAM:
             maxPAMind = i
             break
@@ -20,7 +20,7 @@ def PAM_Score_List(sequence_1, sequence_2):
     return maxPAM, maxPAMnum, PAMlist
         
 def PAM_Score_Graph(PAMlist):
-    PAMMatrices = np.arange(10,310,10, dtype=int)
+    PAMMatrices = np.arange(10,510,10, dtype=int)
     plt.title("PAM Scores")
     plt.xlabel("PAM Matrices")
     plt.ylabel("PAM Scores")
