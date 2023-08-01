@@ -1,17 +1,28 @@
 from galignment import nw_algoirthm
-from matrices import PAM_Score_List, matrices_reader
+from matrices import matrices_reader
+from PAM import PAM_Score_List, PAM_Score_Graph
 import numpy as np
-import os
 
+#Ask if they want PAM or BLOSUM
+#Offer to find global alignment for specific PAM/BLOSUM
+letters, PAMList = matrices_reader()
 
 s1 = input("input sequence for protein one here:")
 s2 = input("input sequence for protein two here:")
 
-a1, a2 = nw_algoirthm(s1,s2)
+#make sure input is within letters given
 
-PAMList = matrices_reader()
+maxScore, BestPAM, PAMlist  = PAM_Score_List(s1, s2)
+a1, a2, GA_Score = nw_algoirthm(s1,s2,letters,PAMList[int((BestPAM/10)-1)])
 
-ScoreList = PAM_Score_List(a1, a2, PAMList)
+print("The maximum score is:", maxScore)
+print("This comes from PAM",BestPAM)
+print("The alignment is:","\n",a1,"\n",a2)
+print("Here is the full list of PAM Scores:", PAMlist)
 
-BestPAM = max(ScoreList)
+
+
+
+
+
 

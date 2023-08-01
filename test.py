@@ -80,4 +80,6 @@ print(PAM)
 
 end = time.time()
 print(end - start)
-#PAM_Score_Graph(list)
+PAM_Score_Graph(list)
+end = time.time()
+print(end-start)

@@ -3,6 +3,7 @@ from galignment import nw_algoirthm
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def PAM_Score_List(sequence_1, sequence_2):
     letters, matrixlist = matrices_reader()
     PAMlist = np.zeros(len(matrixlist))
@@ -19,7 +20,7 @@ def PAM_Score_List(sequence_1, sequence_2):
     return maxPAM, maxPAMnum, PAMlist
         
 def PAM_Score_Graph(PAMlist):
-    PAMMatrices = np.arange(10,260,10, dtype=int)
+    PAMMatrices = np.arange(10,310,10, dtype=int)
     plt.title("PAM Scores")
     plt.xlabel("PAM Matrices")
     plt.ylabel("PAM Scores")
