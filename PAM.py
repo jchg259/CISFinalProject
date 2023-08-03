@@ -1,11 +1,11 @@
-from matrices import matrices_reader
+from matrices import PAMmatrices_reader
 from galignment import nw_algoirthm
 import numpy as np
 import matplotlib.pyplot as plt
 
 
 def PAM_Score_List(sequence_1, sequence_2):
-    letters, matrixlist = matrices_reader()
+    letters, matrixlist = PAMmatrices_reader()
     PAMlist = np.zeros(len(matrixlist))
     for i in range(len(matrixlist)):
         alignment_1, alignment_2, score = nw_algoirthm(sequence_1, sequence_2, letters, matrixlist[i])
