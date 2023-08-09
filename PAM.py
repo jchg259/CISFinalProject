@@ -1,4 +1,3 @@
-import math
 from matrices import PAMmatrices_reader
 from galignment import nw_algoirthm
 import numpy as np
@@ -8,7 +7,7 @@ import matplotlib.pyplot as plt
 def PAM_bitScore(PAMScore):
     L = 0.041
     K = 0.267
-    PAMBitScore = (L*PAMScore - math.log(K)/math.log(2))
+    PAMBitScore = (L*PAMScore - np.log(K))/np.log(2)
     return PAMBitScore
 
 def PAM_Score_List(sequence_1, sequence_2):
@@ -28,10 +27,8 @@ def PAM_Score_List(sequence_1, sequence_2):
 
 def PAM_bitScoreList(PAMList):
     PAMBitScoreList = np.zeros(len(PAMList))
-    L = 0.041
-    K = 0.267
     for i in range(len(PAMList)):
-        PAMBitScoreList[i] = (L*PAMList[i] - math.log(K))/math.log(2)
+        PAMBitScoreList[i] = PAM_bitScore(PAMList[i])
 
     return PAMBitScoreList
         
