@@ -5,9 +5,11 @@ import matplotlib.pyplot as plt
 
 #Need to update so Lambda and K are inputs
 def PAM_bitScore(PAMScore):
-    L = 0.041
-    K = 0.267
-    PAMBitScore = (L*PAMScore - np.log(K))/np.log(2)
+    #L = 0.041
+    #K = 0.267
+    K = 0.279
+    L = 0.058
+    PAMBitScore = (L*PAMScore - np.log(K))/(np.log(2))
     return PAMBitScore
 
 def PAM_Score_List(sequence_1, sequence_2):
@@ -34,7 +36,7 @@ def PAM_bitScoreList(PAMList):
         
 def PAM_Score_Graph(PAMlist):
     PAMMatrices = np.arange(10,510,10, dtype=int)
-    plt.title("PAM Scores")
+    plt.title("Comparing PAMs")
     plt.xlabel("PAM Matrices")
     plt.ylabel("PAM Scores")
     plt.plot(PAMMatrices, PAMlist, color ="red")

@@ -1,10 +1,10 @@
 import numpy as np
 
-from matrices import matrices_reader
+from matrices import PAMmatrices_reader
 
 from galignment import nw_algoirthm
 
-from PAM import PAM_Score_List, PAM_Score_Graph
+from PAM import PAM_Score_List, PAM_Score_Graph, PAM_bitScoreList
 
 import time
 
@@ -53,7 +53,7 @@ for i in range(0,max(n,m)):
 print(pamscore)
 '''
 
-letters, matrixlist = matrices_reader()
+letters, matrixlist = PAMmatrices_reader()
 #matrixitem = matrixlist[1]
 #print(letters)
 #print(matrixitem)
@@ -79,6 +79,9 @@ max, PAM, list = PAM_Score_List("MEETMKLATMEDTVEYCLFLIPDESRDSDKHKEILQKYIERIITRFA
 print(max)
 print(list)
 print(PAM)
+
+PAMBitScoreList = PAM_bitScoreList(list)
+print(PAMBitScoreList)
 
 end = time.time()
 print(end - start)
