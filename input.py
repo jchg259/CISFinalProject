@@ -48,11 +48,7 @@ def GlobalAlignment(sequence1, sequence2, Best, num):
         if num == 2:
             letters, BLOSUMList = BLOSUMmatrices_reader()
             BLOSUMMatrices = np.array([30, 35, 40, 45, 50, 55, 60, 62, 65, 70, 75, 80, 85, 90, 100])
-            def ind(array, item):
-                for idx, val in np.ndenumerate(array):
-                    if val == item:
-                        return idx
-            index = ind(BLOSUMMatrices, Best)
+            index = np.where(BLOSUMMatrices==Best)[0][0]
             a1, a2, score = nw_algoirthm(sequence1, sequence2, letters, BLOSUMList[index])
             print(a1, "\n", a2, sep="")
             return
@@ -66,14 +62,14 @@ def OtherMatrix(sequence1, sequence2, num):
         print("That is not one of the options. Please answer yes or no")
         return OtherMatrix(sequence1, sequence2, num)
     elif answer.lower() == "yes":
-        if num == "1":
+        if num == 1:
             letters, BLOSUMList = BLOSUMmatrices_reader()
             maxBLOSUMScore, BestBLOSUM, BLOSUMScoreList = BLOSUM_Score_List(sequence1, sequence2)
             print("Here is a list of the Scores:", BLOSUMScoreList)
             BLOSUM_Score_Graph(BLOSUMScoreList)
             print("The best score is: ", maxBLOSUMScore, "and comes from the scoring matrix BLOSUM",BestBLOSUM)
             return BestBLOSUM, 3
-        if num == "2":
+        if num == 2:
             letters, PAMList = PAMmatrices_reader()
             minPAMScore, BestPAM, PAMScoreList = PAM_Score_List(sequence1, sequence2)
             print("Here is a list of the Scores:", PAMScoreList)
@@ -88,24 +84,24 @@ def SecondGlobalAlignment(sequence1, sequence2, Best, num):
     if num == 5:
         exit
     else:
-        answer = print("Would you like to see the global alignment for the best scoring matrix? (yes/no)")
+        answer = input("Would you like to see the global alignment for the best scoring matrix? (yes/no)")
         if answer.lower() not in [ "yes", "no"]:
             print("That is not one of the options. Please answer yes or no")
             return GlobalAlignment(sequence1, sequence2, Best, num)
         elif answer.lower() == "yes":
-            if num == "4":
+            if num == 4:
                 letters, PAMList = PAMmatrices_reader()
                 index = int((Best/10)-1)
                 a1, a2, score = nw_algoirthm(sequence1, sequence2, letters, PAMList[index])
                 print(a1, "\n", a2, sep="")
                 return
-            if num == "3":
+            if num == 3:
                 letters, BLOSUMList = BLOSUMmatrices_reader()
                 def ind(array, item):
                     for idx, val in np.ndenumerate(array):
                         if val == item:
                             return idx
-                index = ind(BLOSUMList, Best)
+                index = int(ind(BLOSUMList, Best))
                 a1, a2, score = nw_algoirthm(sequence1, sequence2, letters, BLOSUMList[index])
                 print(a1, "\n", a2, sep="")
                 return
