@@ -97,11 +97,8 @@ def SecondGlobalAlignment(sequence1, sequence2, Best, num):
                 return
             if num == 3:
                 letters, BLOSUMList = BLOSUMmatrices_reader()
-                def ind(array, item):
-                    for idx, val in np.ndenumerate(array):
-                        if val == item:
-                            return idx
-                index = int(ind(BLOSUMList, Best))
+                BLOSUMMatrices = np.array([30, 35, 40, 45, 50, 55, 60, 62, 65, 70, 75, 80, 85, 90, 100])
+                index = np.where(BLOSUMMatrices==Best)[0][0]
                 a1, a2, score = nw_algoirthm(sequence1, sequence2, letters, BLOSUMList[index])
                 print(a1, "\n", a2, sep="")
                 return
