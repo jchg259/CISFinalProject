@@ -4,6 +4,8 @@ import numpy as np
   
 def PAMmatrices_reader():
 	matrixlist = list()
+	Llist = list()
+	Klist = list()
 	path = r"/Users/jgray/Documents/CIS Final Project/CISFinalProject/PAMMatrices"
 	
 	# Change the directory
@@ -12,7 +14,9 @@ def PAMmatrices_reader():
 	def read_text_file(file_path):
 		with open(file_path, 'r') as f:
 			letters = str(f.readline())
-			return letters, f.read()
+			constants = str(f.readline())
+			L, K = constants.strip().split(' ')
+			return letters, L, K, f.read()
   
 	
     # iterate through all file
@@ -23,7 +27,7 @@ def PAMmatrices_reader():
 	    
             # call read text file function and add each file to list
 			#print(read_text_file(file_path))
-			letters, matrixtext = read_text_file(file_path)
+			letters, L, K, matrixtext = read_text_file(file_path)
 			matrixtext = matrixtext.replace("\n", "  ")
 			matrixtext = matrixtext.replace("  ", " ")
 			matrixtext = matrixtext.replace("   ", " ")
@@ -31,8 +35,11 @@ def PAMmatrices_reader():
 			matrixarray = np.fromstring(matrixtext, sep = ' ')
 			matrixarray = matrixarray.reshape(24,24)
 			matrixlist.append(matrixarray)
+			Llist.append(L)
+			Klist.append(K)
+			
 	
-	return letters, matrixlist
+	return letters, matrixlist, Llist, Klist
 
 def BLOSUMmatrices_reader():
 	matrixlist = list()

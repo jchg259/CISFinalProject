@@ -1,6 +1,6 @@
 from galignment import nw_algoirthm
 from matrices import PAMmatrices_reader, BLOSUMmatrices_reader
-from PAM import PAM_Score_List, PAM_Score_Graph
+from PAM import PAM_Score_List, PAM_Score_Graph, PAM_Bit_Score_List, PAM_BitScore_Graph
 from BLOSUM import BLOSUM_Score_List, BLOSUM_Score_Graph
 import numpy as np
 
@@ -18,8 +18,7 @@ def ScoringMatrixChoice(sequence1, sequence2):
         print("That is not one of the options.")
         return ScoringMatrixChoice(sequence1, sequence2)
     elif ScoringType == "PAM":
-        letters, PAMList = PAMmatrices_reader()
-        minPAMScore, BestPAM, PAMScoreList = PAM_Score_List(sequence1, sequence2)
+        minPAMScore, BestPAM, PAMScoreList= PAM_Score_List(sequence1, sequence2)
         print("Here is a list of the Scores:", PAMScoreList)
         PAM_Score_Graph(PAMScoreList)
         print("The best score is: ", minPAMScore, "and comes from the scoring matrix PAM",BestPAM)
@@ -40,7 +39,7 @@ def GlobalAlignment(sequence1, sequence2, Best, num):
         return GlobalAlignment(sequence1, sequence2, Best, num)
     elif answer.lower() == "yes":
         if num == 1:
-            letters, PAMList = PAMmatrices_reader()
+            letters, PAMList, Llist, Klist = PAMmatrices_reader()
             index = int((Best/10)-1)
             a1, a2, score = nw_algoirthm(sequence1, sequence2, letters, PAMList[index])
             print(a1, "\n", a2, sep="")
@@ -63,14 +62,12 @@ def OtherMatrix(sequence1, sequence2, num):
         return OtherMatrix(sequence1, sequence2, num)
     elif answer.lower() == "yes":
         if num == 1:
-            letters, BLOSUMList = BLOSUMmatrices_reader()
             maxBLOSUMScore, BestBLOSUM, BLOSUMScoreList = BLOSUM_Score_List(sequence1, sequence2)
             print("Here is a list of the Scores:", BLOSUMScoreList)
             BLOSUM_Score_Graph(BLOSUMScoreList)
             print("The best score is: ", maxBLOSUMScore, "and comes from the scoring matrix BLOSUM",BestBLOSUM)
             return BestBLOSUM, 3
         if num == 2:
-            letters, PAMList = PAMmatrices_reader()
             minPAMScore, BestPAM, PAMScoreList = PAM_Score_List(sequence1, sequence2)
             print("Here is a list of the Scores:", PAMScoreList)
             PAM_Score_Graph(PAMScoreList)
@@ -90,7 +87,7 @@ def SecondGlobalAlignment(sequence1, sequence2, Best, num):
             return GlobalAlignment(sequence1, sequence2, Best, num)
         elif answer.lower() == "yes":
             if num == 4:
-                letters, PAMList = PAMmatrices_reader()
+                letters, PAMList, Llist, Klist = PAMmatrices_reader()
                 index = int((Best/10)-1)
                 a1, a2, score = nw_algoirthm(sequence1, sequence2, letters, PAMList[index])
                 print(a1, "\n", a2, sep="")
@@ -103,7 +100,17 @@ def SecondGlobalAlignment(sequence1, sequence2, Best, num):
                 print(a1, "\n", a2, sep="")
                 return
         else:
-            print("Great! Thanks for using this program.")
             return
+
+def BitScore(sequence1, sequence2):
+    answer = input("Would you like to see a comparison of all scoring matrices using bit score? (yes/no)")
+    if answer.lower() not in [ "yes", "no"]:
+            print("That is not one of the options. Please answer yes or no")
+            return BitScore(sequence1, sequence2)
+    elif answer.lower() == "yes":
+        PAMBitScoreList = PAM_Bit_Score_List(sequence1, sequence2)
+        PAM_BitScore_Graph(PAMBitScoreList)
+        "Thank you for using this program"
+        return
 
 
